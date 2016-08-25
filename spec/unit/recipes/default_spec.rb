@@ -17,6 +17,14 @@ describe 'metaphlan2::default' do
     expect(chef_run).to include_recipe('poise-python')
   end
 
+  it 'install python' do
+    expect(chef_run).to install_python_runtime('2')
+  end
+
+  it 'install mercurial' do
+    expect(chef_run).to upgrade_package('mercurial')
+  end
+
   it 'sets metaphlan2 version to 2.6.0' do
     expect(chef_run.node['metaphlan2']['version']).to eq('2.6.0')
   end
@@ -41,11 +49,31 @@ describe 'metaphlan2::default' do
     expect(chef_run).to install_python_package('numpy')
   end
 
-  it 'install python' do
-    expect(chef_run).to install_python_runtime('2')
+  it 'install scipy' do
+    expect(chef_run).to install_python_package('scipy')
   end
 
-  it 'install mercurial' do
-    expect(chef_run).to upgrade_package('mercurial')
+  it 'install pandas' do
+    expect(chef_run).to install_python_package('pandas')
+  end
+
+  it 'install png libs' do
+    expect(chef_run).to install_package('Install png libs')
+  end
+
+  it 'install Install freetype libs' do
+    expect(chef_run).to install_package('Install freetype libs')
+  end
+
+  it 'install pkg config' do
+    expect(chef_run).to install_package('Install pkg config')
+  end
+
+  it 'install g++' do
+    expect(chef_run).to install_package('Install g++')
+  end
+
+  it 'install matplotlib' do
+    expect(chef_run).to install_python_package('matplotlib')
   end
 end
