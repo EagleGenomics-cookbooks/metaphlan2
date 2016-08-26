@@ -80,6 +80,11 @@ magic_shell_environment 'PATH' do
   filename 'metaphlan2_path'
   value "$PATH:#{node['metaphlan2']['install_dir']}"
 end
+# put the metaphlan2 utils on the path
+magic_shell_environment 'PATH' do
+  filename 'metaphlan2_utils_path'
+  value "$PATH:#{node['metaphlan2']['install_dir']}/utils"
+end
 # put the export2graphlan tool on the path
 magic_shell_environment 'PATH' do
   filename 'metaphlan2_export_path'
