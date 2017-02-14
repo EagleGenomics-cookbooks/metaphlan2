@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/EagleGenomics-cookbooks/metaphlan2.svg?branch=master)](https://travis-ci.org/EagleGenomics-cookbooks/metaphlan2)
+
 # metaphlan2
 Cookbook to install MetaPhlAn2
 
