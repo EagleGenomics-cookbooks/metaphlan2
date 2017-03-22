@@ -16,7 +16,7 @@ env:
   - RUBYOPT="-W0"
   - secure: ZReGzTzs5bIIwq4UI7ZZpOJFOICs1n828+LABOwpbl0+yVGGyTOPuXC70x0md8UKeDxFiTWNzLJ4ICDXo2CRfcElMRnkR+xcPsvYOggdB7QfoMB3bNu3DDIblDpStHAvIj/XngbUKuCuyLoOT/PE2d7IWvQr/EBJ/VGZlmgJDfO0NrCZoPR8Glcd5j50LSA9RC+0RHsZ2d2e+6y9EaYPzlxUoOiED3cDvmEg7hhUdjdw+gkBu8oOS+I/5uUH4gM2qfgFrdcbsSP2ABUTLxo5AqS5j90R3ixARisRoS9IffI++WGiu5Pay+4h0d2M02XJbwe47uxcVewXX5m5BVusqdF/oUi6QaIB2TJtz+zxoMZ9SJk+/NrA4hsjGJCp/ynu/FVq0pKF4ipe6Qxn2La9+D6MeHpPaPP4Uvz23AqUUiero7FgLvNADQ6mgO+Qn87+7t54OOQoUchSPPEznodxiDjuBy+pyv5DSnLY7JKo//noBhCa5aJNOXCBPpdGm4NyxEzooNnaZaG2POoirqDwAtauRoXI8Z2L53D6uw1xjGqOIJD/BhHFiqs3nK22KqRLFHMThtnPy7pdJhZbZqgAd/rZ/k3fRlWsyzb+C+h3Js71VLjIyl/ghuwVKqH5ObDEtSVwlhrYiXK1GQ+bkq5EQvwnKJTq4azGPKqGp+/ioz4=
   matrix:
-  - CHEF_VERSION=current INSTANCE=default-ubuntu-1404-docker
+  - CHEF_VERSION=current INSTANCE=default-ubuntu-1404
 before_script:
 - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables
   -N DOCKER )
