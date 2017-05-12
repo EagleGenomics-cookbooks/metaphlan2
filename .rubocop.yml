@@ -1,2 +1,5 @@
 LineLength:
   Max: 200
+BlockLength:
+  Max: 100
+
