@@ -5,7 +5,7 @@ addons:
     sources:
     - chef-stable-trusty
     packages:
-    - chefdk
+    - chefdk=1.6.11-1
 install: echo "skip bundle install"
 branches:
   only:
