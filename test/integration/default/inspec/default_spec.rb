@@ -4,6 +4,10 @@ describe file('/usr/local/metaphlan2') do
   it { should be_directory }
 end
 
+describe file('/usr/local/metaphlan2/db_v20') do
+  it { should be_directory }
+end
+
 describe file('/usr/local/metaphlan2/utils') do
   it { should be_directory }
 end
@@ -27,7 +31,7 @@ end
 
 describe command('metaphlan2.py -v') do
   its('exit_status') { should eq 0 }
-  its('stderr') { should match(/2.7.5/) }
+  its('stderr') { should match(/2.6.0/) }
   # TODO: read versio number from node attributes
   # TODO: may need to include version adjustment, as tool versioning not consistent
 end

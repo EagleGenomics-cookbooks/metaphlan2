@@ -63,11 +63,29 @@ python_package 'matplotlib' do
   version '1.5.1'
 end
 
+# leaving this in so it can be re-enabled when (if)
+# the biobakery people sort out the bitbucket installation
 # check out the MetaPhlAn2 sources
-mercurial node['metaphlan2']['install_dir'] do
-  repository 'https://bitbucket.org/biobakery/metaphlan2'
-  reference node['metaphlan2']['version']
-  action :clone
+# mercurial node['metaphlan2']['install_dir'] do
+#   repository 'https://bitbucket.org/biobakery/metaphlan2'
+#   reference node['metaphlan2']['version']
+#   action :clone
+# end
+
+#poise_archive ['https://www.dropbox.com/s/ztqr8qgbo727zpn/metaphlan2.zip', {dl: 1}] do
+#  destination node['metaphlan2']['install_dir']
+#end
+
+bash 'Download zip file' do
+code <<-EOH
+  cd #{node['metaphlan2']['zipfile']['local_dir']}
+  wget #{node['metaphlan2']['zipfile']['remote_url']}
+  EOH
+end
+
+zipfile 'Extract metaphlan 2 zip file' do
+  from node['metaphlan2']['zipfile']['local_file']
+  into node['metaphlan2']['zipfile']['local_dir']
 end
 
 magic_shell_environment 'METAPHLAN2_VERSION' do
