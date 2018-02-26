@@ -4,3 +4,5 @@
 Cookbook to install MetaPhlAn2
 
 Please see (http://huttenhower.sph.harvard.edu/metaphlan2) for more details about the tool.
+NB The taxonomy database is not automatically included in the installation
+
