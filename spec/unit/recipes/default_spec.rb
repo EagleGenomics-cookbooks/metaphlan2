@@ -25,8 +25,8 @@ describe 'metaphlan2::default' do
     expect(chef_run).to upgrade_package('mercurial')
   end
 
-  it 'sets metaphlan2 version to 2.6.0' do
-    expect(chef_run.node['metaphlan2']['version']).to eq('2.6.0')
+  it 'sets metaphlan2 version to 2.7.5' do
+    expect(chef_run.node['metaphlan2']['version']).to eq('2.7.5')
   end
 
   it 'includes the `mercurial` recipe' do
