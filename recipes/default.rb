@@ -72,15 +72,11 @@ end
 #   action :clone
 # end
 
-#poise_archive ['https://www.dropbox.com/s/ztqr8qgbo727zpn/metaphlan2.zip', {dl: 1}] do
-#  destination node['metaphlan2']['install_dir']
-#end
-
 bash 'Download zip file' do
-code <<-EOH
-  cd #{node['metaphlan2']['zipfile']['local_dir']}
-  wget #{node['metaphlan2']['zipfile']['remote_url']}
-  EOH
+  code <<-EOH
+    cd #{node['metaphlan2']['zipfile']['local_dir']}
+    wget #{node['metaphlan2']['zipfile']['remote_url']}
+    EOH
 end
 
 zipfile 'Extract metaphlan 2 zip file' do

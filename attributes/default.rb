@@ -9,7 +9,7 @@ default['metaphlan2']['version'] = '2.6.0'
 # However, the taxonomy database has been completely removed from bitbucket repo, and the only way
 # (so far) we have found to get 2.6.0 with the taxonomy database installed is to use a zipfile they
 # put on dropbox!
-default['metaphlan2']['zipfile']['name'] = 'metaphlan2.zip' 
+default['metaphlan2']['zipfile']['name'] = 'metaphlan2.zip'
 default['metaphlan2']['zipfile']['remote_url'] = 'https://www.dropbox.com/s/ztqr8qgbo727zpn/' + default['metaphlan2']['zipfile']['name']
 default['metaphlan2']['zipfile']['local_dir'] = '/usr/local/'
 default['metaphlan2']['zipfile']['local_file'] = default['metaphlan2']['zipfile']['local_dir'] + default['metaphlan2']['zipfile']['name']
