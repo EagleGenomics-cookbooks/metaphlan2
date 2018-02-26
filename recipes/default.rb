@@ -75,7 +75,7 @@ end
 bash 'Download zip file' do
   code <<-EOH
     cd #{node['metaphlan2']['zipfile']['local_dir']}
-    wget #{node['metaphlan2']['zipfile']['remote_url']}
+    wget -nv #{node['metaphlan2']['zipfile']['remote_url']}
     EOH
 end
 
