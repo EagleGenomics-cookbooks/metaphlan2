@@ -27,7 +27,7 @@ end
 
 describe command('metaphlan2.py -v') do
   its('exit_status') { should eq 0 }
-  its('stderr') { should match(/2.6.0/) }
+  its('stderr') { should match(/2.7.5/) }
   # TODO: read versio number from node attributes
   # TODO: may need to include version adjustment, as tool versioning not consistent
 end
