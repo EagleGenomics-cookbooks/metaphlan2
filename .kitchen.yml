@@ -1,21 +1,24 @@
+---
 driver:
   name: docker
-  use_sudo: false
-  customize:
-    memory: 1024
+
 provisioner:
   name: chef_zero
-  require_chef_omnibus: 12.19.36
+  product_version: '14.10'
+  product_name: chef
+  
 verifier:
   name: inspec
   sudo_command: . /etc/profile;
+
 platforms:
-- name: ubuntu-14.04
-  driver_config:
-    instance_name: metaphlan2-ubuntu1404
-  # - name: centos-7.2
+  - name: ubuntu-18.04
+
 suites:
-- name: default
-  run_list:
-  - recipe[metaphlan2::default]
-  attributes:
+  - name: default
+    run_list:
+      - recipe[metaphlan2::default]
+    verifier:
+      inspec_tests:
+        - test/integration/default
+    attributes:

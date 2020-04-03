@@ -1,35 +1,29 @@
 #
-# Cookbook Name:: metaphlan2
+# Cookbook:: metaphlan2
 # Recipe:: default
 #
 # Copyright (c) 2016 Eagle Genomics Ltd, Apache License, Version 2.0.
 ##########################################################
 
-include_recipe 'apt' if node['platform_family'] == 'debian'
-include_recipe 'poise-python'
-include_recipe 'mercurial'
+apt_update
 
-# install the Python runtime
-python_runtime '2' do
-  version '2.7'
-  pip_version '8.1.2'
-end
+include_recipe 'python_setup'
 
-python_package 'biopython' do
-  version '1.67'
-end
-
-python_package 'numpy' do
+pyenv_pip 'numpy' do
   version '1.11.1'
 end
 
+pyenv_pip 'biopython' do
+  version '1.67'
+end
+
 # requirement for export2graphlan
-python_package 'scipy' do
+pyenv_pip 'scipy' do
   version '0.18.0'
 end
 
 # requirement for export2graphlan
-python_package 'pandas' do
+pyenv_pip 'pandas' do
   version '0.18.1'
 end
 
@@ -38,7 +32,7 @@ end
 package 'Install png libs' do
   case node['platform']
   when 'ubuntu', 'debian'
-    package_name 'libpng12-dev'
+    package_name 'libpng-dev'
   end
 end
 package 'Install freetype libs' do
@@ -59,7 +53,7 @@ package 'Install g++' do
     package_name 'g++'
   end
 end
-python_package 'matplotlib' do
+pyenv_pip 'matplotlib' do
   version '1.5.1'
 end
 

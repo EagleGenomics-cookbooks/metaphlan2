@@ -13,3 +13,4 @@ default['metaphlan2']['zipfile']['name'] = 'metaphlan2.zip'
 default['metaphlan2']['zipfile']['remote_url'] = 'https://www.dropbox.com/s/ztqr8qgbo727zpn/' + default['metaphlan2']['zipfile']['name']
 default['metaphlan2']['zipfile']['local_dir'] = '/usr/local/'
 default['metaphlan2']['zipfile']['local_file'] = default['metaphlan2']['zipfile']['local_dir'] + default['metaphlan2']['zipfile']['name']
+default['python']['version'] = '2.7.17'

@@ -1,37 +1,29 @@
-sudo: required
-dist: trusty
-addons:
-  apt:
-    packages:
-    - chefdk=1.6.11-1
+dist: xenial
+
+before_install:
+  - wget https://packages.chef.io/files/stable/chefdk/3.7.23/ubuntu/16.04/chefdk_3.7.23-1_amd64.deb
+  - sudo dpkg -i chefdk_3.7.23-1_amd64.deb
+  - chef --version
+
 install: echo "skip bundle install"
+
 branches:
   only:
   - master
-services: docker
+
 env:
-  global:
-  - RUBYOPT="-W0"
-  - secure: ZReGzTzs5bIIwq4UI7ZZpOJFOICs1n828+LABOwpbl0+yVGGyTOPuXC70x0md8UKeDxFiTWNzLJ4ICDXo2CRfcElMRnkR+xcPsvYOggdB7QfoMB3bNu3DDIblDpStHAvIj/XngbUKuCuyLoOT/PE2d7IWvQr/EBJ/VGZlmgJDfO0NrCZoPR8Glcd5j50LSA9RC+0RHsZ2d2e+6y9EaYPzlxUoOiED3cDvmEg7hhUdjdw+gkBu8oOS+I/5uUH4gM2qfgFrdcbsSP2ABUTLxo5AqS5j90R3ixARisRoS9IffI++WGiu5Pay+4h0d2M02XJbwe47uxcVewXX5m5BVusqdF/oUi6QaIB2TJtz+zxoMZ9SJk+/NrA4hsjGJCp/ynu/FVq0pKF4ipe6Qxn2La9+D6MeHpPaPP4Uvz23AqUUiero7FgLvNADQ6mgO+Qn87+7t54OOQoUchSPPEznodxiDjuBy+pyv5DSnLY7JKo//noBhCa5aJNOXCBPpdGm4NyxEzooNnaZaG2POoirqDwAtauRoXI8Z2L53D6uw1xjGqOIJD/BhHFiqs3nK22KqRLFHMThtnPy7pdJhZbZqgAd/rZ/k3fRlWsyzb+C+h3Js71VLjIyl/ghuwVKqH5ObDEtSVwlhrYiXK1GQ+bkq5EQvwnKJTq4azGPKqGp+/ioz4=
   matrix:
-  - CHEF_VERSION=current INSTANCE=default-ubuntu-1404
+  - INSTANCE=default-ubuntu-1804
+
 before_script:
 - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables
   -N DOCKER )
 - eval "$(/opt/chefdk/bin/chef shell-init bash)"
 - chef gem install kitchen-docker
 - /opt/chefdk/bin/chef exec rake tests
+
 script:
-- KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
-notifications:
-  slack:
-    on_success: change
-    on_failure: change
-    secure: YCmu2+7DoiTcpCiVnt8tF2J88Lo2OTZUCufcYPM384ToI94EfbvtzypNcmy+Z3J3XFTuzPvMCrsYQTwYzf26f30kXoOKvg3Qi0xbWxsKItMeo9lsh9tvyW90n0zjYFXugecV0eWv3Xbs+Tg0CqKHdYSuRvXSmU3EZ+chNOqlgx3/ZHO3FNRpSnIfrevat1mMfR5o0yobEHHRQQcEie8/t/TJXfSdJiI+ED/Z/HsDwS5iVze1gdWZLR/AGxbyqHQot15wOL7f65wsgI5mfW4Tl4P4uUVkZbITsSQ+K0blhh9a+4e3AJYfISdeuNluy6+Uc/7Z8id2H/NawOo1lawIjeEnmN0IvgjpOtcVybZ4naRry8U4g/6fAAYwYOIKRNskMBSfBFS+XKA/2yJq2Uj7Rv/O2oJrgDeUOUQHo/BJIpVEBjzLWcn7NyhMHHVVdj00zBPQSpTCrs4KRRRnkMAgXP/yL2IgU87ZhTjySDGd6+7ASJ9Jc9K2XaD0vN3bWaYoo8DLnZ+D+OtOcmyVxEDzY/0HnCLXjr0C4W4yaH0j7QHttNSTPg+G/oA/x9apazlpDAkI4lg6QfPugPsuxVtwwJHIKfmrF75jSyv5CnZofDfKLPKukZAVJJB/UikwopbQkEcxF6rMqH2j7B2v9NCbehD7AdrSs3/kecpflT01lDE=
-  email:
-    on_success: change
-    on_failure: change
-after_success:
-- chmod +x trigger_dependent_build.sh
-- ./trigger_dependent_build.sh EagleGenomics-cookbooks metaphlan2-runnable private
-  $TRAVIS_ACCESS_TOKEN
+- /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
+
+after_script:
+- /opt/chefdk/embedded/bin/kitchen destroy ${INSTANCE}
